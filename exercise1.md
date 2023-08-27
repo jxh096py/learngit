@@ -148,4 +148,11 @@ git config --global credential.helper store
 
 - The following can be done by you. You can use both the information found in this exercise and the steps in the video for Session 1 - to assist you with these challenges. Please aim to complete ALL of them.
     - **Checkout the `main` branch**
-    - 
+    - **Write a new file called `hello.txt` with one line: `hello world`**
+    - **Run `git status`**
+    - **Add the file `hello.txt` so it is _staged_**
+    - **Commit the file with the commit message: `Adding file hello.txt`**
+    - **Push the file to the remote `main` branch**
+    - **Switch to `hello` branch**
+    - **Stretch: Pull in changes from the `main` branch to the current `hello` branch. This should copy the hello.txt file into the `hello` branch as you are pulling from main.
+ 
