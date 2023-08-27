@@ -6,8 +6,8 @@ In this exercise, you will learn the following:
 - How to sign up to a based online product (we will use Github ) ✔
 - Installing Git on your machine ✔
 - Set your name and email in Git ✔
-- Enable storing your git credentials
-- Creating a git repo
+- Enable storing your git credentials ✔
+- Creating a git repo ✔
 - Cloning it locally
 - Creating branches
 - Deleting Branches
@@ -36,11 +36,27 @@ git config --global user.email "mary.jane@example.com"
 ```
 
 ### 4. Enable storing your git credentials
-- When you make commits, it helps to know who made the commit and what their email is. Rather than use your default credentials from github account, OR defaulting to your login name etc, we will store a set name and email in the **- - global config**. 
+- When we have a remote (GitHub) hosted git repository, they are often private and changes require having credentials. Even public repositories require credentials by the owner to change contents and add / remove files to the repo
+- Often when we do a `git push`, we have to log-in to GitHub. To avoid logging in repeatedly, you can enable storage of credentials which will ensure you don't have to keep logging in
+- With this option, **you** have to be aware that git stores the credentials in a plain text file, which can be exploited by malicious third-party code or others who may have acess to your machine
+- Finally, with this option, if your login is _unsuccessful_ then your git pull / push will fail, which will **remove the stale (current) credential from the store**, and successful future login credentials will then subsequently be stored.
+- simply run:
+```
+git config --global credential.helper store
+```
+
+### 5. Creating a git repo
+- Create a _private_ git repo in GitHub called 'myfirstrepo'
+- Go through the options and allow it to create a default 'main' branch with a ReadMe.md tile to begin with
+
+### 6. Cloning it locally
+- Go on to the 'myfirstrepo' GitHub page which should be defaulted to the _main_ branch view. There's a green button called '<>Code'. Click on that - it's a drop-down. Under **clone**, copy the 'HTTPS uri
+- Go back to your local machine's terminal, and create a new directory called 'repos' e.g. `mkdir ~/repos` (`~` is linux speech for _my home directory_, but this is not a Linux course!)
+- Go into the repos directory e.g. `cd repos` (`cd` is linux speech for _change my directory to_)
+- Once inside the repos directory run the following with your https uri copied above:
+`git clone https://github.com/yourpathhere`
+- This will now download your GitHub repo and its content in a **local repo** and manage link it to the **remote repo**, where you will be able to run git commands and manage the contents here
 - 
-
-### 3. Get yourself a Github Account
-
 
 Markdown is a lightweight markup language based on the formatting conventions
 that people naturally use in email.
