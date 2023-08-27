@@ -150,4 +150,4 @@ git config --global credential.helper store
 ### 9. Challenges:
 
 - The following can be done by you. You can use both the information found in this exercise and the steps in the video for Session 1 - to assist you with these challenges. Please aim to complete ALL of them.
- - 
+    - test
