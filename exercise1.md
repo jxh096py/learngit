@@ -8,9 +8,9 @@ In this exercise, you will learn the following:
 - Set your name and email in Git ✔
 - Enable storing your git credentials ✔
 - Creating a git repo ✔
-- Cloning it locally
-- Creating branches
-- Deleting Branches
+- Cloning it locally ✔
+- Creating branches ✔
+- Deleting Branches ✔
 - Listing Branches (local)
 - Listing Branches (remote)
 - Making changes: add (stage) / commit / push
@@ -56,175 +56,98 @@ git config --global credential.helper store
 - Once inside the repos directory run the following with your https uri copied above:
 `git clone https://github.com/yourpathhere`
 - This will now download your GitHub repo and its content in a **local repo** and manage link it to the **remote repo**, where you will be able to run git commands and manage the contents here
-- 
 
-Markdown is a lightweight markup language based on the formatting conventions
-that people naturally use in email.
-As [John Gruber] writes on the [Markdown site][df1]
+### 6. Creating branches 
+- Now that you have a local version of your remote repository, you can go ahead and create a branch. There are two ways to create a branch. Run these commands one at a time:
+    - `git status` - this will tell you the **status of the branch you are on**, but also indicate what local branch you are on **(main)** and it's mapping to the remote branch **(origin/main)**:
+        ```
+        $ git status
+          ...On branch main
+          Your branch is up to date with 'origin/main'
+        ```
+- We're now going to branch _off of main_ (also we can say we are **branching from main**). Run the following:
+    - use the `branch` subcommand to add a branch called _hello_
+        ```
+        $ git branch hello
+        ```
+        If you run `git status` again you can see that we are still on the `main` branch. This is because we need to switch to the `hello` branch we created. But, first let's list all the local branches available. Run:
+        ```
+        $ git branch
+          hello
+          * main
+        ```
+        You can see the * is on the main, because we are currently sitting **on** the main branch. Now, run `git checkout hello` to switch to the new branch we just created.
+        ```
+        $ git checkout hello
+          Switched to branch 'hello'
+        ```
+        And that's it! You've created a branch and switched to it. 
+-  An easier way to do this is to use the `git checkout -b <new_branch_name>` command. It will create the new branch **and** switch to it in one command. 
+    -  Run this command to find out how this works:
+        ```
+        $ git checkout -b newFeatureBranch
+          Switched to a new branch 'newFeatureBranch'
+        ```
+        This has now created a new branch off-of `main` and switched to it. You can confirm this by running `git status`
+        ```
+        $ git status
+          On branch newFeatureBranch
+          nothing to commit, working tree clean
+        ```
 
-> The overriding design goal for Markdown's
-> formatting syntax is to make it as readable
-> as possible. The idea is that a
-> Markdown-formatted document should be
-> publishable as-is, as plain text, without
-> looking like it's been marked up with tags
-> or formatting instructions.
+### 7. Deleting Branches 
+- Now that we know how to create branches, let's go ahead and delete them. First try to delete the branch `newFeatureBranch` by running`git branch -d newFeatureBranch`. 
+- It shouldn't work! 
+- This is because you're currently already on this branch. You can't really delete the branch that you're currently on. Run `git status` to check which branch you are on. 
+- You can switch to another branch and then delete the `newFeatureBranch` You can do this by running: 
+    ```
+    $ git checkout hello 
+      Switched to branch 'hello'
+    $ git branch -d newFeatureBranch
+      Deleted branch newFeatureBranch (was 67614c8).
+    ```
+- That worked. You can see that it's deleted by...
 
-This text you see here is *actually- written in Markdown! To get a feel
-for Markdown's syntax, type some text into the left window and
-watch the results in the right.
+### 7. Listing Branches (local)
+- You can list all local branches simply by running `git branch` as we have done above. You will see that you now have only two branches: `main` and `hello` which was branched from `main`. 
+    ```
+    $ git branch 
+      * hello
+        main
+    ```
 
-## Tech
+### 8. Listing Branches (remote)
+- Although we can list local branches, we can also list the branches on the _origin_. The word **origin** in git world means 'remote' - that's the repo hosted on the internet. As we did not push our `hello` branch, only the remote branch`main`, exists in our GitHub repo. You can run the `git branch -r` command to list all remote branches.  
+    ```
+    $ git branch -r
+      origin/HEAD -> origin/main
+      origin/main
+    ```
+- You can see only `origin/main` exists. But there is a pointer `origin/HEAD` too! This is just a pointer -- it is pointing too the branch `main` on the remote repo. 
+- **BONUS HOMEWORK:** Whatis the point `origin/HEAD` and what's it purpose?
+- You can go ahead and go to the GitHub UI in your browser, and you refresh the page, list the branches in the drop down -- hello will still not exist because we have yet to push it up.
 
-Dillinger uses a number of open source projects to work properly:
+### 9. Making changes: add (stage) / commit / push
+- To push up the new `hello` branch, we can simply push up the branch on its own. It has no changes whatsoever and the file contents look exactly like `main` from which we branched from. But, the creation of a new branch, is, in and of itself, a change. Therefore we can simply push it by running:
+    - `git push`
+- After running the push command above, you will get the following message: 
+    ```
+    $ git push
+      To push the current branch and set the remote as upstream, use
+      git push --set-upstream origin hello
+    ```
+- This basically means that you need to tell it what branch this local branch will map to in on the remote repository. That is to say --`hello` branch exists locally, but not remotely. So we need to use the `--set-upstream` on our first push to tell it what branch to push up to on the remote. 
+- It only makes sense to keep the same name on the remote branch, so let's run the suggested command on our first push:
+    ```
+    $ git push --set-upstream origin hello
+      ...
+      * [new branch]      hello -> hello
+      branch 'hello' set up to track 'origin/hello'.
+    ```
+- You can see, amongst other things... it's created a new branch on the remote repo, `origin/hello`. Above it, it has mapped `hello` with (hello) `hello`. The former is the local branch. The latter is the _hello_ branch in the remote world. 
+- Now, if you log in to your GitHub UI and inspect the list of branches, you will see that `hello` will be in the list.
 
-- [AngularJS] - HTML enhanced for web apps!
-- [Ace Editor] - awesome web-based text editor
-- [markdown-it] - Markdown parser done right. Fast and easy to extend.
-- [Twitter Bootstrap] - great UI boilerplate for modern web apps
-- [node.js] - evented I/O for the backend
-- [Express] - fast node.js network app framework [@tjholowaychuk]
-- [Gulp] - the streaming build system
-- [Breakdance](https://breakdance.github.io/breakdance/) - HTML
-to Markdown converter
-- [jQuery] - duh
+### 9. Challenges:
 
-And of course Dillinger itself is open source with a [public repository][dill]
- on GitHub.
-
-## Installation
-
-Dillinger requires [Node.js](https://nodejs.org/) v10+ to run.
-
-Install the dependencies and devDependencies and start the server.
-
-```sh
-cd dillinger
-npm i
-node app
-```
-
-For production environments...
-
-```sh
-npm install --production
-NODE_ENV=production node app
-```
-
-## Plugins
-
-Dillinger is currently extended with the following plugins.
-Instructions on how to use them in your own application are linked below.
-
-| Plugin | README |
-| ------ | ------ |
-| Dropbox | [plugins/dropbox/README.md][PlDb] |
-| GitHub | [plugins/github/README.md][PlGh] |
-| Google Drive | [plugins/googledrive/README.md][PlGd] |
-| OneDrive | [plugins/onedrive/README.md][PlOd] |
-| Medium | [plugins/medium/README.md][PlMe] |
-| Google Analytics | [plugins/googleanalytics/README.md][PlGa] |
-
-## Development
-
-Want to contribute? Great!
-
-Dillinger uses Gulp + Webpack for fast developing.
-Make a change in your file and instantaneously see your updates!
-
-Open your favorite Terminal and run these commands.
-
-First Tab:
-
-```sh
-node app
-```
-
-Second Tab:
-
-```sh
-gulp watch
-```
-
-(optional) Third:
-
-```sh
-karma test
-```
-
-#### Building for source
-
-For production release:
-
-```sh
-gulp build --prod
-```
-
-Generating pre-built zip archives for distribution:
-
-```sh
-gulp build dist --prod
-```
-
-## Docker
-
-Dillinger is very easy to install and deploy in a Docker container.
-
-By default, the Docker will expose port 8080, so change this within the
-Dockerfile if necessary. When ready, simply use the Dockerfile to
-build the image.
-
-```sh
-cd dillinger
-docker build -t <youruser>/dillinger:${package.json.version} .
-```
-
-This will create the dillinger image and pull in the necessary dependencies.
-Be sure to swap out `${package.json.version}` with the actual
-version of Dillinger.
-
-Once done, run the Docker image and map the port to whatever you wish on
-your host. In this example, we simply map port 8000 of the host to
-port 8080 of the Docker (or whatever port was exposed in the Dockerfile):
-
-```sh
-docker run -d -p 8000:8080 --restart=always --cap-add=SYS_ADMIN --name=dillinger <youruser>/dillinger:${package.json.version}
-```
-
-> Note: `--capt-add=SYS-ADMIN` is required for PDF rendering.
-
-Verify the deployment by navigating to your server address in
-your preferred browser.
-
-```sh
-127.0.0.1:8000
-```
-
-## License
-
-MIT
-
-**Free Software, Hell Yeah!**
-
-[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
-
-   [dill]: <https://github.com/joemccann/dillinger>
-   [git-repo-url]: <https://github.com/joemccann/dillinger.git>
-   [john gruber]: <http://daringfireball.net>
-   [df1]: <http://daringfireball.net/projects/markdown/>
-   [markdown-it]: <https://github.com/markdown-it/markdown-it>
-   [Ace Editor]: <http://ace.ajax.org>
-   [node.js]: <http://nodejs.org>
-   [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
-   [jQuery]: <http://jquery.com>
-   [@tjholowaychuk]: <http://twitter.com/tjholowaychuk>
-   [express]: <http://expressjs.com>
-   [AngularJS]: <http://angularjs.org>
-   [Gulp]: <http://gulpjs.com>
-
-   [PlDb]: <https://github.com/joemccann/dillinger/tree/master/plugins/dropbox/README.md>
-   [PlGh]: <https://github.com/joemccann/dillinger/tree/master/plugins/github/README.md>
-   [PlGd]: <https://github.com/joemccann/dillinger/tree/master/plugins/googledrive/README.md>
-   [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>
-   [PlMe]: <https://github.com/joemccann/dillinger/tree/master/plugins/medium/README.md>
-   [PlGa]: <https://github.com/RahulHP/dillinger/blob/master/plugins/googleanalytics/README.md>
+- The following can be done by you. You can use both the information found in this exercise and the steps in the video for Session 1 - to assist you with these challenges. Please aim to complete ALL of them.
+ - 
