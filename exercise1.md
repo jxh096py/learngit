@@ -154,5 +154,5 @@ git config --global credential.helper store
     - **Commit the file with the commit message: `Adding file hello.txt`**
     - **Push the file to the remote `main` branch**
     - **Switch to `hello` branch**
-    - **Stretch: Pull in changes from the `main` branch to the current `hello` branch. This should copy the hello.txt file into the `hello` branch as you are pulling from main.
+    - **Stretch: Pull in changes from the `main` branch to the current `hello` branch. This should copy the hello.txt file into the `hello` branch as you are pulling from main.**
  
