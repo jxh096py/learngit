@@ -11,12 +11,9 @@ In this exercise, you will learn the following:
 - Cloning it locally ✔
 - Creating branches ✔
 - Deleting Branches ✔
-- Listing Branches (local)
-- Listing Branches (remote)
-- Making changes: add (stage) / commit / push
-- Pulling changes: fetch + merge _versus_ pull
-- Using git diff
-- Seeing your commit history
+- Listing Branches (local) ✔
+- Listing Branches (remote) ✔
+- Making changes: add (stage) / commit / push ✔
 
 ### 1. How to sign up to a based online product (we will use Github )
 - Go to the GitHub website and sign up to get an account. Make a note of your account details
@@ -150,4 +147,5 @@ git config --global credential.helper store
 ### 9. Challenges:
 
 - The following can be done by you. You can use both the information found in this exercise and the steps in the video for Session 1 - to assist you with these challenges. Please aim to complete ALL of them.
-    - test
+    - **Checkout the `main` branch**
+    - 
